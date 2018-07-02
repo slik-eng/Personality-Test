@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/main_container_cl"
+    android:layout_margin="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/question_text_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textColor="#222222"
+        />
+
+    <TextView
+        android:id="@+id/question_category_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceSmall"
+        android:textColor="@android:color/darker_gray"
+        app:layout_constraintStart_toStartOf="@+id/question_text_tv"
+        app:layout_constraintTop_toBottomOf="@+id/question_text_tv"
+        />
+
+    <RadioGroup
+        android:id="@+id/answers_rb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/question_category_tv"
+        app:layout_constraintTop_toBottomOf="@+id/question_category_tv"
+        />
+
+    <LinearLayout
+        android:id="@+id/extra_question_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="30dp"
+        app:layout_constraintStart_toStartOf="@+id/answers_rb"
+        app:layout_constraintTop_toBottomOf="@+id/answers_rb"
+        android:visibility="gone"
+        >
+        <TextView
+            android:id="@+id/question2_text_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:textAppearance="?android:textAppearanceMedium"
+            />
+        <EditText
+            android:id="@+id/answer2_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:inputType="number"/>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

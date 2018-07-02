@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Personality Test</string>
+    <string name="single_choice">single_choice</string>
+    <string name="single_choice_conditional">single_choice_conditional</string>
+    <string name="submit">Submit</string>
+    <string name="reset">Reset</string>
+</resources>
