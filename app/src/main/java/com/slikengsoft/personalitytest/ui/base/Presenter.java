@@ -24,4 +24,6 @@ public interface Presenter {
     void onResume();
 
     void onItemSelected(Question question, int position);
+
+    void onQuestionListFiltered(String str);
 }

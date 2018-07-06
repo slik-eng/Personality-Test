@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,7 +30,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class QuestionActivity extends BaseActivity implements QuestionPresenter.View {
+public class QuestionActivity extends BaseActivity implements QuestionPresenter.View, AdapterView.OnItemSelectedListener {
     @BindView(R.id.question_rv)
     RecyclerView mQuestionRecyclerView;
     @BindView(R.id.progress)
@@ -39,7 +38,6 @@ public class QuestionActivity extends BaseActivity implements QuestionPresenter.
     @BindView(R.id.category_s)
     Spinner mCategory_s;
     Toast toast;
-    ArrayList<Question> questionArrayList = null;
     private static final String TAG = QuestionActivity.class.getSimpleName();
 
 
@@ -89,7 +87,6 @@ public class QuestionActivity extends BaseActivity implements QuestionPresenter.
 
     @Override
     public void showQuestions(List<Question> questions) {
-        questionArrayList = (ArrayList<Question>) questions;
         mQuestionAdapter = new QuestionAdapter(new ArrayList<>());
         mQuestionAdapter.setQuestions(questions);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -109,11 +106,18 @@ public class QuestionActivity extends BaseActivity implements QuestionPresenter.
 
     @Override
     public void showCategories(List<String> categories) {
+        categories.add(0, "Select...");
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, categories);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mCategory_s.setAdapter(adapter);
+        mCategory_s.setOnItemSelectedListener(this);
+    }
+
+    @Override
+    public void showFilteredList(List<Question> questions) {
+        mQuestionAdapter.replaceData(questions);
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
@@ -135,5 +139,15 @@ public class QuestionActivity extends BaseActivity implements QuestionPresenter.
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        presenter.onQuestionListFiltered(parent.getItemAtPosition(position).toString());
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
